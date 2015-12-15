@@ -6,14 +6,14 @@ if ps aux | grep "puppet agent" | grep -v grep 2> /dev/null
 then
     echo "Puppet Agent is already installed. Moving on..."
 else
-    sudo apt-get install -yq puppet
+    sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm && \
+    sudo yum -y install puppet-3.7.5
 fi
 
 if cat /etc/crontab | grep puppet 2> /dev/null
 then
     echo "Puppet Agent is already configured. Exiting..."
 else
-    sudo apt-get update -yq && sudo apt-get upgrade -yq
 
     sudo puppet resource cron puppet-agent ensure=present user=root minute=30 \
         command='/usr/bin/puppet agent --onetime --no-daemonize --splay'

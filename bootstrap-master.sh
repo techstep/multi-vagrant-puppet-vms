@@ -6,11 +6,11 @@ if ps aux | grep "puppet master" | grep -v grep 2> /dev/null
 then
     echo "Puppet Master is already installed. Exiting..."
 else
+    PUPPET_URL="https://yum.puppetlabs.com/el/6/products/x86_64"
     # Install Puppet Master
-    wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb && \
-    sudo dpkg -i puppetlabs-release-trusty.deb && \
-    sudo apt-get update -yq && sudo apt-get upgrade -yq && \
-    sudo apt-get install -yq puppetmaster
+    sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm && \
+    sudo yum -y install puppet-3.7.5 && \
+    sudo yum -y install puppetserver
 
     # Configure /etc/hosts file
     echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
