@@ -28,7 +28,7 @@ else
     echo "192.168.32.20   node02.example.com  node02" | sudo tee --append /etc/hosts 2> /dev/null
 
     # Add agent section to /etc/puppet/puppet.conf
-    echo "" && echo "[agent]\nserver=puppet" | sudo tee --append /etc/puppet/puppet.conf 2> /dev/null
+    echo "" && echo -e "[agent]\n\tserver=puppet" | sudo tee --append /etc/puppet/puppet.conf 2> /dev/null
 
     sudo puppet agent --enable
 fi
